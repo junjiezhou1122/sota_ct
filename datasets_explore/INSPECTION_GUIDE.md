@@ -1,24 +1,57 @@
 # CT Data Inspection Guide
 
+## Overview
+
+This guide covers the comprehensive CT volume inspection tool designed to analyze medical imaging datasets. The tool provides detailed statistics, quality checks, and preprocessing recommendations for CT scan data in various formats (DICOM, NIfTI, NumPy).
+
+**Key Features:**
+- Automatic format detection (DICOM, NIfTI, NumPy arrays)
+- Comprehensive volume statistics (dimensions, spacing, HU values)
+- Quality issue detection (artifacts, missing slices, extreme values)
+- Preprocessing recommendations based on dataset characteristics
+- Visualization of data distributions
+
+## Project Structure
+
+This inspection tool is part of the `sota_ct` project managed with Poetry:
+
+```
+sota_ct/
+├── pyproject.toml          # Poetry dependencies and project config
+├── poetry.lock             # Locked dependency versions
+├── .gitignore             # Git ignore patterns
+├── datasets_explore/       # CT data exploration scripts
+│   ├── inspect_ct_volumes.py
+│   ├── INSPECTION_GUIDE.md (this file)
+│   └── dataset_summary.md
+└── datasets/              # Downloaded datasets
+```
+
 ## Quick Start
 
 ### 1. Install Dependencies
 
+This project uses Poetry for dependency management. All required packages are defined in the root `pyproject.toml`.
+
 ```bash
-cd /Users/junjie/Desktop/reserach/sota_ct/datasets_explore
+# From project root
+cd /path/to/sota_ct
 
-# Activate your virtual environment
-source venv/bin/activate
+# Install all dependencies using Poetry
+poetry install
 
-# Install required packages
-pip install -r requirements_inspection.txt
+# Activate the Poetry virtual environment
+poetry shell
+
+# Alternatively, run commands directly with poetry run
+poetry run python datasets_explore/inspect_ct_volumes.py --help
 ```
 
 ### 2. Run Inspection
 
 #### For DICOM data:
 ```bash
-python inspect_ct_volumes.py \
+poetry run python datasets_explore/inspect_ct_volumes.py \
     --data_dir /path/to/your/dicom/data \
     --format dicom \
     --output_dir inspection_results
@@ -26,7 +59,7 @@ python inspect_ct_volumes.py \
 
 #### For NIfTI data:
 ```bash
-python inspect_ct_volumes.py \
+poetry run python datasets_explore/inspect_ct_volumes.py \
     --data_dir /path/to/your/nifti/data \
     --format nifti \
     --output_dir inspection_results
@@ -34,14 +67,14 @@ python inspect_ct_volumes.py \
 
 #### Auto-detect format:
 ```bash
-python inspect_ct_volumes.py \
+poetry run python datasets_explore/inspect_ct_volumes.py \
     --data_dir /path/to/your/ct/data \
     --format auto
 ```
 
 #### Quick test (first 10 samples):
 ```bash
-python inspect_ct_volumes.py \
+poetry run python datasets_explore/inspect_ct_volumes.py \
     --data_dir /path/to/your/ct/data \
     --max_samples 10
 ```
@@ -203,8 +236,10 @@ Shows Z/XY spacing ratio distribution
 ### Issue: "SimpleITK not available"
 **Solution:**
 ```bash
-pip install SimpleITK
+poetry add simpleitk
 ```
+
+This dependency should already be installed via `poetry install`. If you see this error, verify your Poetry environment is activated.
 
 ### Issue: "Error loading DICOM"
 **Possible causes:**
@@ -263,14 +298,17 @@ Use the generated `preprocessing_config.json` as input to your preprocessing scr
 ## Example Workflow
 
 ```bash
+# From project root, ensure Poetry environment is active
+poetry shell
+
 # 1. Quick test with 10 samples
-python inspect_ct_volumes.py --data_dir /data/ct --max_samples 10
+poetry run python datasets_explore/inspect_ct_volumes.py --data_dir /data/ct --max_samples 10
 
 # 2. Review results
 cat inspection_results/dataset_summary.txt
 
 # 3. Full inspection
-python inspect_ct_volumes.py --data_dir /data/ct
+poetry run python datasets_explore/inspect_ct_volumes.py --data_dir /data/ct
 
 # 4. Check for issues
 cat inspection_results/quality_issues.json
@@ -286,7 +324,7 @@ cp inspection_results/preprocessing_config.json ../preprocessing/config.json
 
 ### Add Custom Quality Checks
 
-Edit `analyze_volume()` method:
+Edit `analyze_volume()` method in `inspect_ct_volumes.py`:
 
 ```python
 # Check for motion artifacts (high std in edges)
@@ -326,16 +364,18 @@ plt.savefig(output_dir / 'hu_histogram.png')
 ```python
 from huggingface_hub import hf_hub_download
 
-# Download and inspect
+# Download dataset
 data_dir = hf_hub_download(
     repo_id="RadGenome/RadGenome-ChestCT",
     filename="ct_scans/",
     repo_type="dataset",
     local_dir="./data"
 )
+```
 
-# Run inspection
-python inspect_ct_volumes.py --data_dir ./data/ct_scans
+```bash
+# Run inspection with Poetry
+poetry run python datasets_explore/inspect_ct_volumes.py --data_dir ./data/ct_scans
 ```
 
 ### LIDC-IDRI
@@ -386,7 +426,7 @@ image = sitk.ReadImage("path/to/problematic/file")
 3. Increase system RAM
 
 ### Plots not generated
-1. Check if matplotlib is installed
+1. Check if matplotlib is installed: `poetry show matplotlib`
 2. Verify DISPLAY environment variable (if SSH)
 3. Use `Agg` backend for headless systems:
 ```python
@@ -396,11 +436,22 @@ matplotlib.use('Agg')
 
 ---
 
-## Contact
+## Contributing
 
-For issues or questions about this inspection tool:
+When extending or modifying this tool:
+1. Follow the existing code structure
+2. Add type hints to new functions
+3. Update this guide with new features
+4. Test with multiple data formats
+
+---
+
+## Contact & Support
+
+For issues or questions:
 - Check the code comments in `inspect_ct_volumes.py`
 - Review error messages in terminal output
 - Consult `quality_issues.json` for specific problems
+- Refer to the project's main documentation
 
 Good luck with your CT data analysis! 🏥🔬

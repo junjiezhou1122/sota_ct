@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Poetry
+poetry.lock
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data and datasets (uncomment if needed)
+# datasets/
+# *.nii
+# *.nii.gz
+# *.dcm
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb
+
+# Project specific
+.factory/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
