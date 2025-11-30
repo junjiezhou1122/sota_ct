@@ -86,6 +86,7 @@ class CTVolumeInspector:
                 return dicom_dirs
         
         if format_type == "nifti" or format_type == "auto":
+            # Only accept proper NIfTI extensions to avoid matching arbitrary gzip files
             nifti_files = list(self.data_dir.rglob("*.nii.gz")) + list(self.data_dir.rglob("*.nii"))
             if nifti_files:
                 print(f"   Found {len(nifti_files)} NIfTI files")
@@ -239,10 +240,11 @@ class CTVolumeInspector:
         # HU value statistics (sample to avoid memory issues)
         sample_size = min(volume.size, 10_000_000)
         if volume.size > sample_size:
-            indices = np.random.choice(volume.size, sample_size, replace=False)
-            sample = volume.flat[indices]
+            # Use strided sampling to avoid allocating a huge index array
+            step = max(1, volume.size // sample_size)
+            sample = volume.ravel()[::step][:sample_size]
         else:
-            sample = volume.flatten()
+            sample = volume.ravel()
         
         stats['hu_min'] = float(np.min(sample))
         stats['hu_max'] = float(np.max(sample))
@@ -324,7 +326,7 @@ class CTVolumeInspector:
                 
                 if ct_path.is_dir():  # DICOM
                     volume, metadata = self.load_dicom_volume(ct_path)
-                elif ct_path.suffix in ['.nii', '.gz']:  # NIfTI
+                elif ct_path.name.endswith('.nii.gz') or ct_path.suffix == '.nii':  # NIfTI
                     volume, metadata = self.load_nifti_volume(ct_path)
                 elif ct_path.suffix in ['.npy', '.npz']:  # NumPy
                     volume, metadata = self.load_numpy_volume(ct_path)
@@ -353,9 +355,10 @@ class CTVolumeInspector:
                 continue
         
         elapsed_time = time.time() - start_time
+        processed = max(1, len(self.volume_stats))
         print(f"\n✅ Completed inspection of {len(self.volume_stats)} volumes")
         print(f"   Time elapsed: {elapsed_time/60:.1f} minutes")
-        print(f"   Average time per volume: {elapsed_time/len(ct_files):.2f} seconds")
+        print(f"   Average time per volume: {elapsed_time/processed:.2f} seconds")
         if error_count > 0:
             print(f"   ⚠️  Errors encountered: {error_count} volumes")
     
