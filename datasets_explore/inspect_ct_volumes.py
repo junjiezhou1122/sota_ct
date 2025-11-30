@@ -20,6 +20,8 @@ from pathlib import Path
 from collections import defaultdict
 from typing import Dict, List, Tuple, Optional
 import warnings
+import time
+from tqdm import tqdm
 warnings.filterwarnings('ignore')
 
 try:
@@ -290,7 +292,7 @@ class CTVolumeInspector:
         
         return stats
     
-    def inspect_dataset(self, format_type: str = "auto", max_samples: Optional[int] = None):
+    def inspect_dataset(self, format_type: str = "auto", max_samples: Optional[int] = None, batch_save: int = 100):
         """Inspect all CT volumes in the dataset"""
         print("\n" + "="*60)
         print("CT VOLUME INSPECTION")
@@ -310,37 +312,67 @@ class CTVolumeInspector:
         else:
             print(f"\n📊 Inspecting {len(ct_files)} volumes...")
         
-        # Process each file
-        for i, ct_path in enumerate(ct_files, 1):
-            print(f"\n[{i}/{len(ct_files)}] Processing: {ct_path.name}")
-            
-            # Load volume
-            volume, metadata = None, None
-            
-            if ct_path.is_dir():  # DICOM
-                volume, metadata = self.load_dicom_volume(ct_path)
-            elif ct_path.suffix in ['.nii', '.gz']:  # NIfTI
-                volume, metadata = self.load_nifti_volume(ct_path)
-            elif ct_path.suffix in ['.npy', '.npz']:  # NumPy
-                volume, metadata = self.load_numpy_volume(ct_path)
-            
-            if volume is None or metadata is None:
-                continue
-            
-            # Analyze
-            stats = self.analyze_volume(volume, metadata)
-            self.volume_stats.append(stats)
-            self.metadata_list.append(metadata)
-            
-            # Print basic info
-            print(f"   Shape: {stats['shape_d']} × {stats['shape_h']} × {stats['shape_w']}")
-            if 'spacing_x' in stats:
-                print(f"   Spacing: {stats['spacing_x']:.2f} × {stats['spacing_y']:.2f} × {stats['spacing_z']:.2f} mm")
-            print(f"   HU range: [{stats['hu_min']:.1f}, {stats['hu_max']:.1f}]")
-            if 'quality_issues' in stats:
-                print(f"   ⚠️  Issues: {stats['quality_issues']}")
+        # Track progress
+        start_time = time.time()
+        error_count = 0
         
+        # Process each file with progress bar
+        for i, ct_path in enumerate(tqdm(ct_files, desc="Processing volumes", unit="vol"), 1):
+            try:
+                # Load volume
+                volume, metadata = None, None
+                
+                if ct_path.is_dir():  # DICOM
+                    volume, metadata = self.load_dicom_volume(ct_path)
+                elif ct_path.suffix in ['.nii', '.gz']:  # NIfTI
+                    volume, metadata = self.load_nifti_volume(ct_path)
+                elif ct_path.suffix in ['.npy', '.npz']:  # NumPy
+                    volume, metadata = self.load_numpy_volume(ct_path)
+                
+                if volume is None or metadata is None:
+                    error_count += 1
+                    continue
+                
+                # Analyze
+                stats = self.analyze_volume(volume, metadata)
+                self.volume_stats.append(stats)
+                self.metadata_list.append(metadata)
+                
+                # Batch save intermediate results (in case of interruption)
+                if i % batch_save == 0:
+                    self._save_intermediate_results(i)
+                    
+            except Exception as e:
+                error_count += 1
+                tqdm.write(f"⚠️  Error processing {ct_path.name}: {e}")
+                self.quality_issues.append({
+                    'path': str(ct_path),
+                    'issue': 'processing_error',
+                    'details': str(e)
+                })
+                continue
+        
+        elapsed_time = time.time() - start_time
         print(f"\n✅ Completed inspection of {len(self.volume_stats)} volumes")
+        print(f"   Time elapsed: {elapsed_time/60:.1f} minutes")
+        print(f"   Average time per volume: {elapsed_time/len(ct_files):.2f} seconds")
+        if error_count > 0:
+            print(f"   ⚠️  Errors encountered: {error_count} volumes")
+    
+    def _save_intermediate_results(self, current_index: int):
+        """Save intermediate results during processing"""
+        if not self.volume_stats:
+            return
+        
+        temp_df = pd.DataFrame(self.volume_stats)
+        temp_path = self.output_dir / f"volume_statistics_temp_{current_index}.csv"
+        temp_df.to_csv(temp_path, index=False)
+        
+        # Save quality issues so far
+        if self.quality_issues:
+            temp_issues_path = self.output_dir / f"quality_issues_temp_{current_index}.json"
+            with open(temp_issues_path, 'w') as f:
+                json.dump(self.quality_issues, f, indent=2)
     
     def generate_summary(self):
         """Generate summary statistics"""
