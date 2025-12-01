@@ -390,39 +390,3 @@ class RegionSpecificPreprocessor:
         
         return results
 
-
-def example_usage():
-    """Example of how to use the preprocessing pipeline"""
-    
-    # Initialize preprocessor
-    config = TubeletConfig(
-        fine_size=(16, 64, 64),
-        mid_size=(32, 128, 128),
-        coarse_size=(64, 256, 256),
-        target_shape=(128, 384, 384),
-        use_overlap=True
-    )
-    
-    preprocessor = CTPreprocessor(
-        tubelet_config=config,
-        region=AnatomyRegion.LUNG
-    )
-    
-    # Preprocess a single volume
-    nifti_path = Path("/path/to/ct_scan.nii.gz")
-    result = preprocessor.preprocess(nifti_path)
-    
-    print(f"Preprocessed volume shape: {result['volume'].shape}")
-    print(f"Fine tubelets: {result['tubelets_fine'].shape}")
-    print(f"Mid tubelets: {result['tubelets_mid'].shape}")
-    print(f"Coarse tubelets: {result['tubelets_coarse'].shape}")
-    
-    # Convert to PyTorch tensors
-    volume_tensor = torch.from_numpy(result['volume']).float()
-    fine_tensor = torch.from_numpy(result['tubelets_fine']).float()
-    
-    return result
-
-
-if __name__ == "__main__":
-    example_usage()

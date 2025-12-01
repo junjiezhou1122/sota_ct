@@ -240,9 +240,7 @@ def collate_fn(batch: List[Dict]) -> Dict[str, torch.Tensor]:
     
     # For tubelets, we have two options:
     # Option 1: Pad to max length in batch
-    # Option 2: Return as list (model handles variable length)
-    
-    # Option 1 (padding):
+
     def pad_tubelets(tubelet_list, pad_value=-1024):
         """Pad tubelets to same length"""
         max_len = max(t.shape[0] for t in tubelet_list)
@@ -293,36 +291,33 @@ def collate_fn(batch: List[Dict]) -> Dict[str, torch.Tensor]:
 
 
 def create_dataloaders(
-    data_dir: Path,
-    csv_file: Path,
+    train_data_dir: Path,
+    train_csv_file: Path,
+    val_data_dir: Path,
+    val_csv_file: Path,
     mask_dir: Optional[Path] = None,
     batch_size: int = 4,
     num_workers: int = 4,
-    train_split: float = 0.8
 ) -> Tuple[torch.utils.data.DataLoader, torch.utils.data.DataLoader]:
     """
-    Create train and validation dataloaders
+    Create train and validation dataloaders using the official
+    RadGenome train/validation split.
     """
-    # Create full dataset
-    full_dataset = CTReportDataset(
-        data_dir=data_dir,
-        csv_file=csv_file,
+    # Training dataset (with augmentation)
+    train_dataset = CTReportDataset(
+        data_dir=train_data_dir,
+        csv_file=train_csv_file,
         mask_dir=mask_dir,
-        augment=False  # Will set to True for train split
+        augment=True
     )
     
-    # Split into train/val
-    dataset_size = len(full_dataset)
-    train_size = int(train_split * dataset_size)
-    val_size = dataset_size - train_size
-    
-    train_dataset, val_dataset = torch.utils.data.random_split(
-        full_dataset, 
-        [train_size, val_size]
+    # Validation dataset (no augmentation)
+    val_dataset = CTReportDataset(
+        data_dir=val_data_dir,
+        csv_file=val_csv_file,
+        mask_dir=mask_dir,
+        augment=False
     )
-    
-    # Enable augmentation for training
-    train_dataset.dataset.augment = True
     
     # Create dataloaders
     train_loader = torch.utils.data.DataLoader(
@@ -344,49 +339,3 @@ def create_dataloaders(
     )
     
     return train_loader, val_loader
-
-
-def test_dataset():
-    """Test the dataset"""
-    from pathlib import Path
-    
-    # Paths (adjust for your setup)
-    data_dir = Path("/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed")
-    csv_file = Path("/mnt2/ct/RadGenome-ChestCT/dataset/train_case_sentences.csv")
-    mask_dir = Path("/mnt2/ct/RadGenome-ChestCT/dataset/train_masks")
-    
-    # Create dataset
-    dataset = CTReportDataset(
-        data_dir=data_dir,
-        csv_file=csv_file,
-        mask_dir=mask_dir,
-        use_regions=True,
-        augment=True,
-        max_samples=10  # Test with 10 samples
-    )
-    
-    # Test loading a sample
-    sample = dataset[0]
-    
-    print("Sample loaded successfully!")
-    print(f"Fine tubelets: {sample['tubelets_fine'].shape}")
-    print(f"Mid tubelets: {sample['tubelets_mid'].shape}")
-    print(f"Coarse tubelets: {sample['tubelets_coarse'].shape}")
-    print(f"Volume: {sample['volume'].shape}")
-    print(f"Regions: {list(sample['regions'].keys())}")
-    
-    # Test dataloader
-    dataloader = torch.utils.data.DataLoader(
-        dataset,
-        batch_size=2,
-        collate_fn=collate_fn
-    )
-    
-    batch = next(iter(dataloader))
-    print(f"\nBatch volumes: {batch['volumes'].shape}")
-    print(f"Batch fine tubelets: {batch['tubelets_fine'].shape}")
-    print(f"Batch masks: {batch['masks_fine'].shape}")
-
-
-if __name__ == "__main__":
-    test_dataset()
