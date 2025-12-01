@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-End-to-end shared vision encoder for multi-scale tubelets.
+Shared vision encoder for multi-scale tubelets.
 
-This "shared-only" version uses:
-    - a shared TubeletEmbedding3D
-    - a shared Transformer encoder (SharedViTEncoder)
-to produce multi-scale vision tokens.
+Design:
+    - Learned tubelet embedding (3D Conv + pooling) -> (B, N, C)
+    - Scale embedding (fine / mid / coarse)
+    - Shared ViT-style Transformer (can load pretrained weights)
+      to produce multi-scale vision tokens.
 """
 
 from typing import Tuple
@@ -37,18 +38,29 @@ class VisionEncoder(nn.Module):
     def __init__(
         self,
         embed_dim: int = 512,
-        num_layers: int = 4,
-        num_heads: int = 8,
+        depth: int = 4,
+        heads: int = 8,
+        dim_head: int = 64,
+        mlp_dim: int = 2048,
         dropout: float = 0.1,
+        pretrained_vit: nn.Module | None = None,
     ):
         super().__init__()
         self.embed = TubeletEmbedding3D(embed_dim=embed_dim)
         self.encoder = SharedViTEncoder(
-            embed_dim=embed_dim,
-            num_layers=num_layers,
-            num_heads=num_heads,
+            dim=embed_dim,
+            depth=depth,
+            heads=heads,
+            dim_head=dim_head,
+            mlp_dim=mlp_dim,
             dropout=dropout,
         )
+        # Optionally load transformer weights from a pretrained ViT
+        if pretrained_vit is not None and hasattr(pretrained_vit, "transformer"):
+            self.encoder.transformer.load_state_dict(
+                pretrained_vit.transformer.state_dict(), strict=True
+            )
+            print("Loaded transformer weights from pretrained ViT.")
 
     def forward(
         self,
@@ -76,4 +88,3 @@ class VisionEncoder(nn.Module):
 
 
 __all__ = ["VisionEncoder"]
-
