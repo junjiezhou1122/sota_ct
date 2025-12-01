@@ -62,16 +62,18 @@ from ct_dataset import CTReportDataset, create_dataloaders
 # Create dataset
 dataset = CTReportDataset(
     data_dir=Path("/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed"),
-    csv_file=Path("/path/to/train_case_sentences.csv"),
+    csv_file=Path("/path/to/train_region_report.csv"),
     mask_dir=Path("/path/to/masks"),  # Optional
     use_regions=True,
     augment=True
 )
 
-# Or create train/val dataloaders
+# Or create train/val dataloaders using the official split
 train_loader, val_loader = create_dataloaders(
-    data_dir=Path("/path/to/data"),
-    csv_file=Path("/path/to/csv"),
+    train_data_dir=Path("/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed"),
+    train_csv_file=Path("/mnt2/ct/RadGenome-ChestCT/dataset/radgenome_files/train_region_report.csv"),
+    val_data_dir=Path("/mnt2/ct/RadGenome-ChestCT/dataset/valid_preprocessed"),
+    val_csv_file=Path("/mnt2/ct/RadGenome-ChestCT/dataset/radgenome_files/validation_region_report.csv"),
     batch_size=4,
     num_workers=4
 )

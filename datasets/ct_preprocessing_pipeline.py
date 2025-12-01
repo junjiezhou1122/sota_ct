@@ -18,6 +18,7 @@ from typing import Tuple, Dict, Optional, List
 import torch
 from dataclasses import dataclass
 from enum import Enum
+from ct_configs import TubeletConfig
 
 
 class AnatomyRegion(Enum):
@@ -64,26 +65,6 @@ class HUWindow:
             AnatomyRegion.GLOBAL: HUWindow(-1024, 240, "global"), # Global windowing is important (capture the global info)
         }
         return windows[region]
-
-
-@dataclass
-class TubeletConfig:
-    """Configuration for multi-scale tubelet extraction"""
-    # Tubelet sizes (depth, height, width)
-    fine_size: Tuple[int, int, int] = (16, 64, 64)      # Small receptive field
-    mid_size: Tuple[int, int, int] = (32, 128, 128)     # Medium receptive field
-    coarse_size: Tuple[int, int, int] = (64, 256, 256)  # Large receptive field (full context)
-    
-    # Stride (for overlapping tubelets)
-    fine_stride: Tuple[int, int, int] = (8, 32, 32)     # 50% overlap
-    mid_stride: Tuple[int, int, int] = (16, 64, 64)     # 50% overlap
-    coarse_stride: Tuple[int, int, int] = (32, 128, 128) # 50% overlap
-    
-    # Target volume size (before tubelet extraction)
-    target_shape: Tuple[int, int, int] = (128, 384, 384)  # (D, H, W)
-    
-    # Whether to use overlapping tubelets
-    use_overlap: bool = True
 
 
 class CTPreprocessor:
@@ -389,4 +370,3 @@ class RegionSpecificPreprocessor:
                 continue
         
         return results
-

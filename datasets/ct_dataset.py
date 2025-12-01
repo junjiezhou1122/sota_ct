@@ -18,9 +18,9 @@ import pandas as pd
 from ct_preprocessing_pipeline import (
     CTPreprocessor,
     RegionSpecificPreprocessor,
-    TubeletConfig,
-    AnatomyRegion
+    AnatomyRegion,
 )
+from ct_configs import TubeletConfig, default_config_for_paper
 
 
 class CTReportDataset(Dataset):
@@ -57,7 +57,8 @@ class CTReportDataset(Dataset):
         """
         self.data_dir = Path(data_dir)
         self.mask_dir = Path(mask_dir) if mask_dir else None
-        self.tubelet_config = tubelet_config or TubeletConfig()
+        # Use the paper default unless an explicit config is provided
+        self.tubelet_config = tubelet_config or default_config_for_paper()
         self.use_regions = use_regions
         self.augment = augment
         

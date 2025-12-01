@@ -221,16 +221,13 @@ coarse_tubelets: (N3, 64, 256, 256)   # Global context
 ### Basic Usage
 
 ```python
-from ct_preprocessing_pipeline import CTPreprocessor, TubeletConfig
 from pathlib import Path
 
-# Configure
-config = TubeletConfig(
-    target_shape=(128, 384, 384),
-    fine_size=(16, 64, 64),
-    mid_size=(32, 128, 128),
-    coarse_size=(64, 256, 256)
-)
+from ct_preprocessing_pipeline import CTPreprocessor
+from ct_configs import default_config_for_paper
+
+# Configure tubelets (paper default)
+config = default_config_for_paper()
 
 # Preprocess
 preprocessor = CTPreprocessor(config)
@@ -245,13 +242,17 @@ coarse = result['tubelets_coarse']  # (N3, 64, 256, 256)
 ### PyTorch Dataset
 
 ```python
+from pathlib import Path
+
 from ct_dataset import CTReportDataset
+from ct_configs import default_config_for_paper
 
 dataset = CTReportDataset(
     data_dir=Path("/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed"),
-    csv_file=Path("/path/to/train_case_sentences.csv"),
+    csv_file=Path("/path/to/train_region_report.csv"),
     mask_dir=Path("/path/to/masks"),
-    augment=True
+    tubelet_config=default_config_for_paper(),  # explicit but optional
+    augment=True,
 )
 
 # Load sample
@@ -271,10 +272,12 @@ print(sample['tubelets_fine'].shape)  # torch.Size([N1, 16, 64, 64])
    - Each region uses optimal HU window
    - Preserves maximum diagnostic information
 
-3. **Multi-scale approach:**
+3. **Multi-scale approach / configs:**
    - Fine: Local details (nodules, edges)
    - Mid: Regional patterns (consolidation)
    - Coarse: Global context (lung architecture)
+   - All tubelet sizes/strides are defined in `ct_configs.py`,
+     so changing the backbone only requires editing that file.
 
 ---
 
