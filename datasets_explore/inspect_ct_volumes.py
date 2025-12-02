@@ -14,11 +14,12 @@ Usage:
 
 import argparse
 import json
+import glob
 import numpy as np
 import pandas as pd
 from pathlib import Path
 from collections import defaultdict
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, List, Tuple, Optional, Set
 import warnings
 import time
 from tqdm import tqdm
@@ -317,10 +318,17 @@ class CTVolumeInspector:
         # Track progress
         start_time = time.time()
         error_count = 0
+
+        # Load already-processed paths so we can skip them (resume behaviour)
+        processed_paths: Set[str] = self._load_existing_paths()
         
         # Process each file with progress bar
         for i, ct_path in enumerate(tqdm(ct_files, desc="Processing volumes", unit="vol"), 1):
             try:
+                # Skip if this volume has already been processed in previous runs
+                if str(ct_path) in processed_paths:
+                    continue
+
                 # Load volume
                 volume, metadata = None, None
                 
@@ -376,6 +384,102 @@ class CTVolumeInspector:
             temp_issues_path = self.output_dir / f"quality_issues_temp_{current_index}.json"
             with open(temp_issues_path, 'w') as f:
                 json.dump(self.quality_issues, f, indent=2)
+
+    def _load_existing_paths(self) -> Set[str]:
+        """
+        Load paths of volumes that have already been processed.
+        This looks at the final volume_statistics.csv and all
+        volume_statistics_temp_*.csv files under the output dir.
+        """
+        processed: Set[str] = set()
+
+        # Final stats if they exist
+        final_stats = self.output_dir / "volume_statistics.csv"
+        if final_stats.exists():
+            try:
+                df_final = pd.read_csv(final_stats)
+                if "path" in df_final.columns:
+                    processed.update(df_final["path"].astype(str).tolist())
+            except Exception:
+                pass
+
+        # All temp stats
+        temp_files = glob.glob(str(self.output_dir / "volume_statistics_temp_*.csv"))
+        for csv_path in temp_files:
+            try:
+                df_temp = pd.read_csv(csv_path)
+                if "path" in df_temp.columns:
+                    processed.update(df_temp["path"].astype(str).tolist())
+            except Exception:
+                continue
+
+        if processed:
+            print(f"\n🔁 Found {len(processed)} already processed volumes (will skip).")
+        return processed
+
+    def _load_all_partial_results(self) -> Tuple[pd.DataFrame, List[Dict]]:
+        """
+        Load and merge all partial results (temp + final).
+
+        Returns:
+            merged_stats_df, merged_quality_issues_list
+        """
+        all_stats = []
+        all_issues: List[Dict] = []
+
+        # Final stats
+        final_stats = self.output_dir / "volume_statistics.csv"
+        if final_stats.exists():
+            try:
+                df_final = pd.read_csv(final_stats)
+                all_stats.append(df_final)
+            except Exception:
+                pass
+
+        # Temp stats
+        for csv_path in glob.glob(str(self.output_dir / "volume_statistics_temp_*.csv")):
+            try:
+                df_temp = pd.read_csv(csv_path)
+                all_stats.append(df_temp)
+            except Exception:
+                continue
+
+        if all_stats:
+            stats_merged = pd.concat(all_stats, ignore_index=True)
+            if "path" in stats_merged.columns:
+                stats_merged = stats_merged.drop_duplicates(subset="path")
+        else:
+            stats_merged = pd.DataFrame()
+
+        # Final quality issues
+        final_issues = self.output_dir / "quality_issues.json"
+        if final_issues.exists():
+            try:
+                with open(final_issues, "r") as f:
+                    all_issues.extend(json.load(f))
+            except Exception:
+                pass
+
+        # Temp quality issues
+        temp_issue_files = glob.glob(str(self.output_dir / "quality_issues_temp_*.json"))
+        for json_path in temp_issue_files:
+            try:
+                with open(json_path, "r") as f:
+                    all_issues.extend(json.load(f))
+            except Exception:
+                continue
+
+        # Deduplicate issues by (path, issue, details)
+        if all_issues:
+            unique = {}
+            for item in all_issues:
+                key = (item.get("path"), item.get("issue"), item.get("details"))
+                unique[key] = item
+            issues_merged = list(unique.values())
+        else:
+            issues_merged = []
+
+        return stats_merged, issues_merged
     
     def generate_summary(self):
         """Generate summary statistics"""
@@ -564,8 +668,26 @@ class CTVolumeInspector:
             print(f"   ✅ Anisotropy plot saved to: {aniso_path}")
     
     def save_results(self, df: pd.DataFrame):
-        """Save detailed results"""
-        print("\n💾 Saving detailed results...")
+        """Save detailed results, merging with any existing partial results."""
+        print("\n💾 Saving detailed results (merging partial CSV/JSON)...")
+
+        # Merge with existing partial/final results
+        existing_stats, existing_issues = self._load_all_partial_results()
+
+        if not df.empty:
+            if existing_stats.empty:
+                merged_stats = df
+            else:
+                merged_stats = pd.concat([existing_stats, df], ignore_index=True)
+        else:
+            merged_stats = existing_stats
+
+        if not merged_stats.empty and "path" in merged_stats.columns:
+            merged_stats = merged_stats.drop_duplicates(subset="path")
+
+        df = merged_stats
+        if existing_issues:
+            self.quality_issues = existing_issues
         
         # Save volume statistics
         stats_path = self.output_dir / "volume_statistics.csv"
