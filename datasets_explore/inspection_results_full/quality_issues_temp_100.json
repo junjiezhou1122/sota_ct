@@ -1,0 +1,502 @@
+[
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_18046/train_18046a/train_18046_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 298x102"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_1/train_1a/train_1_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Extreme high HU: 7629.37890625; Small image size: 420x101"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10/train_10a/train_10_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 418x59"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_100/train_100a/train_100_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 470x96"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_1000/train_1000a/train_1000_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 330x105"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10000/train_10000a/train_10000_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 313x96"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10001/train_10001a/train_10001_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 411x102"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10002/train_10002a/train_10002_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 352x104"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10003/train_10003a/train_10003_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 290x106"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10004/train_10004a/train_10004_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 368x97"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10005/train_10005a/train_10005_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 330x58"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10006/train_10006a/train_10006_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 377x116"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10006/train_10006b/train_10006_b_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Extreme high HU: 5921.64599609375; Small image size: 402x108"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10007/train_10007a/train_10007_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 410x63"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10008/train_10008a/train_10008_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 350x54"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10009/train_10009a/train_10009_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 350x127"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_1001/train_1001a/train_1001_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 325x102"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_1001/train_1001b/train_1001_b_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 379x96"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10010/train_10010a/train_10010_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 350x127"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10011/train_10011a/train_10011_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme high HU: 21029.599609375; Small image size: 230x25"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10012/train_10012a/train_10012_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 375x51"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10013/train_10013a/train_10013_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Extreme high HU: 8470.7734375; Small image size: 336x81"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10013/train_10013b/train_10013_b_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Extreme high HU: 10324.40625; Small image size: 355x99"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10015/train_10015a/train_10015_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 318x47"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10016/train_10016a/train_10016_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 432x126"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10016/train_10016b/train_10016_b_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 424x63"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10016/train_10016c/train_10016_c_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 422x127"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10016/train_10016d/train_10016_d_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 399x125"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10017/train_10017a/train_10017_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 388x56"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10018/train_10018a/train_10018_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Extreme high HU: 7430.22021484375; Small image size: 371x126"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10019/train_10019a/train_10019_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 382x102"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_1002/train_1002a/train_1002_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 350x102"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_1002/train_1002b/train_1002_b_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 331x100"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10020/train_10020a/train_10020_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 383x51"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10021/train_10021a/train_10021_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 352x102"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10022/train_10022a/train_10022_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 347x120"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10023/train_10023a/train_10023_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 378x61"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10024/train_10024a/train_10024_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 350x57"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10025/train_10025a/train_10025_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 395x57"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10026/train_10026a/train_10026_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 423x92"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10027/train_10027a/train_10027_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 347x49"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10027/train_10027b/train_10027_b_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 364x106"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10028/train_10028a/train_10028_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 467x69"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10029/train_10029a/train_10029_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 480x69"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_1003/train_1003a/train_1003_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 408x120"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10030/train_10030a/train_10030_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Extreme high HU: 9450.35546875; Small image size: 409x105"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10030/train_10030b/train_10030_b_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Extreme high HU: 18093.10546875; Small image size: 399x195"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10031/train_10031a/train_10031_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 495x62"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10033/train_10033a/train_10033_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 375x119"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10034/train_10034a/train_10034_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 427x108"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10035/train_10035a/train_10035_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 322x54"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10036/train_10036a/train_10036_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 377x131"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10037/train_10037a/train_10037_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 410x56"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10038/train_10038a/train_10038_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 385x120"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10039/train_10039a/train_10039_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 367x110"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_1004/train_1004a/train_1004_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 397x54"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_1004/train_1004b/train_1004_b_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 356x134"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10040/train_10040a/train_10040_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 372x106"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10041/train_10041a/train_10041_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 487x145"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10042/train_10042a/train_10042_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 386x131"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10043/train_10043a/train_10043_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 363x102"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10043/train_10043b/train_10043_b_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 370x96"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10044/train_10044a/train_10044_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 396x210"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10045/train_10045a/train_10045_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 407x56"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10046/train_10046a/train_10046_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme high HU: 6486.146484375; Small image size: 312x107"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10047/train_10047a/train_10047_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 383x55"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10047/train_10047b/train_10047_b_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 332x59"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10048/train_10048a/train_10048_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Extreme high HU: 15874.8662109375; Small image size: 392x100"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10049/train_10049a/train_10049_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 367x70"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_1005/train_1005a/train_1005_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 377x112"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10051/train_10051a/train_10051_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 403x121"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10052/train_10052a/train_10052_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 387x125"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10053/train_10053a/train_10053_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 375x56"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10054/train_10054a/train_10054_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 350x111"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10055/train_10055a/train_10055_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 384x118"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10056/train_10056a/train_10056_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 350x102"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10057/train_10057a/train_10057_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 375x55"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10058/train_10058a/train_10058_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 360x135"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10059/train_10059a/train_10059_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 372x113"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_1006/train_1006a/train_1006_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 322x118"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10060/train_10060a/train_10060_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 367x115"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10061/train_10061a/train_10061_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 331x52"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10062/train_10062a/train_10062_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 392x105"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10063/train_10063a/train_10063_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Extreme high HU: 13958.77734375; Small image size: 340x97"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10064/train_10064a/train_10064_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -8192.0; Small image size: 398x107"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10065/train_10065a/train_10065_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 360x58"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10066/train_10066a/train_10066_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 350x124"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10067/train_10067a/train_10067_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 304x109"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10068/train_10068a/train_10068_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 334x44"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10014/train_10014a/train_10014_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 350x118"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10032/train_10032a/train_10032_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 362x118"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10050/train_10050a/train_10050_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 351x108"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10069/train_10069a/train_10069_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 350x59"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10087/train_10087a/train_10087_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 387x52"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10104/train_10104a/train_10104_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -2228.779541015625; Extreme high HU: 15385.716796875; Small image size: 315x104"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10122/train_10122a/train_10122_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 350x88"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10140/train_10140a/train_10140_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Extreme low HU: -2060.13525390625; Extreme high HU: 8266.95703125; Small image size: 321x99"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10159/train_10159a/train_10159_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 379x63"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10183/train_10183a/train_10183_a_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 372x100"
+  },
+  {
+    "path": "/mnt2/ct/RadGenome-ChestCT/dataset/train_preprocessed/train_10183/train_10183b/train_10183_b_1.nii.gz",
+    "issue": "quality_check",
+    "details": "Small image size: 376x121"
+  }
+]
