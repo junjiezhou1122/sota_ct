@@ -182,12 +182,12 @@ class CTReportDataset(Dataset):
         """
         Get a preprocessed sample
         
-        Returns:
+        Returns (using data-driven defaults):
             {
                 'tubelets_fine': (N1, 16, 64, 64),
-                'tubelets_mid': (N2, 32, 128, 128),
-                'tubelets_coarse': (N3, 64, 256, 256),
-                'volume': (128, 384, 384),  # Optional, for visualization
+                'tubelets_mid': (N2, 32, 96, 96),
+                'tubelets_coarse': (N3, 48, 160, 160),
+                'volume': (192, 384, 160),  # Optional, for visualization
                 'regions': dict of region reports,
                 'volume_name': str
             }

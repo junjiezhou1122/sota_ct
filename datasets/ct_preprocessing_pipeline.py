@@ -71,13 +71,13 @@ class CTPreprocessor:
     """
     Comprehensive CT preprocessing pipeline
     
-    Steps:
+    Steps (data-driven defaults):
     1. Load NIfTI volume
     2. Handle extreme HU values (outliers)
     3. Apply region-specific HU windowing
     4. Z-score normalization
-    5. Resize/resample to target shape
-    6. Extract multi-scale tubelets
+    5. Resize/pad-crop to target shape (192×384×160 by default)
+    6. Extract multi-scale tubelets (fine 16×64×64, mid 32×96×96, coarse 48×160×160)
     """
     
     def __init__(
@@ -232,11 +232,11 @@ class CTPreprocessor:
         """
         Extract tubelets at three scales: fine, mid, coarse
         
-        Returns:
+        Returns (using TubeletConfig defaults):
             {
                 'fine': (N1, 16, 64, 64),
-                'mid': (N2, 32, 128, 128),
-                'coarse': (N3, 64, 256, 256)
+                'mid': (N2, 32, 96, 96),
+                'coarse': (N3, 48, 160, 160)
             }
         """
         config = self.tubelet_config
@@ -279,8 +279,8 @@ class CTPreprocessor:
             {
                 'volume': preprocessed volume (D, H, W),
                 'tubelets_fine': (N1, 16, 64, 64),
-                'tubelets_mid': (N2, 32, 128, 128),
-                'tubelets_coarse': (N3, 64, 256, 256),
+                'tubelets_mid': (N2, 32, 96, 96),
+                'tubelets_coarse': (N3, 48, 160, 160),
                 'metadata': {...}
             }
         """

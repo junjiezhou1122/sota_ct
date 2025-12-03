@@ -17,17 +17,19 @@ class TubeletConfig:
     """Configuration for multi-scale tubelet extraction."""
 
     # Tubelet sizes (depth, height, width)
-    fine_size: Tuple[int, int, int] = (16, 64, 64)      # Small receptive field
-    mid_size: Tuple[int, int, int] = (32, 128, 128)     # Medium receptive field
-    coarse_size: Tuple[int, int, int] = (64, 256, 256)  # Large receptive field (full context)
+    # Sizes tuned for current dataset stats (D/H≈370, W≈100, spacing=1mm)
+    # Use narrower W to avoid padding huge empty regions.
+    fine_size: Tuple[int, int, int] = (16, 64, 64)       # Local detail
+    mid_size: Tuple[int, int, int] = (32, 96, 96)        # Regional context
+    coarse_size: Tuple[int, int, int] = (48, 160, 160)   # Global-ish context
 
-    # Stride (for overlapping tubelets)
-    fine_stride: Tuple[int, int, int] = (8, 32, 32)      # 50% overlap
-    mid_stride: Tuple[int, int, int] = (16, 64, 64)      # 50% overlap
-    coarse_stride: Tuple[int, int, int] = (32, 128, 128) # 50% overlap
+    # Stride (overlap ~50%)
+    fine_stride: Tuple[int, int, int] = (8, 32, 32)
+    mid_stride: Tuple[int, int, int] = (16, 48, 48)
+    coarse_stride: Tuple[int, int, int] = (24, 80, 80)
 
-    # Target volume size (before tubelet extraction)
-    target_shape: Tuple[int, int, int] = (128, 384, 384)  # (D, H, W)
+    # Target volume size (before tubelet extraction), multiple of 16 for clean grids
+    target_shape: Tuple[int, int, int] = (192, 384, 160)  # (D, H, W)
 
     # Whether to use overlapping tubelets
     use_overlap: bool = True
@@ -43,12 +45,11 @@ def default_config_for_paper() -> TubeletConfig:
     """
     return TubeletConfig(
         fine_size=(16, 64, 64),
-        mid_size=(32, 128, 128),
-        coarse_size=(64, 256, 256),
+        mid_size=(32, 96, 96),
+        coarse_size=(48, 160, 160),
         fine_stride=(8, 32, 32),
-        mid_stride=(16, 64, 64),
-        coarse_stride=(32, 128, 128),
-        target_shape=(128, 384, 384),
-        use_overlap=True,
+        mid_stride=(16, 48, 48),
+        coarse_stride=(24, 80, 80),
+        target_shape=(192, 384, 160),
+        use_overlap=True,  # keep overlap to densify coverage
     )
-
