@@ -1,0 +1,18 @@
+{
+  "hu_clip_range": [
+    -1024.0,
+    453.5043289184551
+  ],
+  "target_spacing": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "target_shape": [
+    128,
+    512,
+    512
+  ],
+  "normalization": "z_score_after_clip",
+  "notes": "Generated from dataset inspection"
+}
